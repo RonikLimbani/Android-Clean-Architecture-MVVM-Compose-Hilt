@@ -11,8 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.ronik.android_clean_architecture_mvvm_compose.presentation.Screen
+import com.ronik.android_clean_architecture_mvvm_compose.presentation.coin_detail.CoinDetailScreen
+import com.ronik.android_clean_architecture_mvvm_compose.presentation.coin_list.CoinListScreen
 import com.ronik.android_clean_architecture_mvvm_compose.presentation.ui.theme.AndroidCleanArchitectureMVVMComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +28,23 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidCleanArchitectureMVVMComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                   val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CoinListScreen.route,
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    ) {
+                        composable(
+                            route = Screen.CoinListScreen.route
+                        ) {
+                            CoinListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.CoinDetailsScreen.route + "/{coinId}"
+                        ) {
+                            CoinDetailScreen()
+                        }
+                    }
                 }
             }
         }
