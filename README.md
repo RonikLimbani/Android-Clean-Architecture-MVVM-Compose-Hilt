@@ -2,6 +2,11 @@
 A clean architecture approach  using Jetpack compose, Kotlin, Navigation, MVVM, Hilt, Kotlin Coroutines, Flow and Retrofit.
 
 
+## Get to the API here:
+
+👉 https://api.coinpaprika.com
+
+
 ## 🖼️ OutPut Screens
 
 | List Screen   | Details Screen  | 
